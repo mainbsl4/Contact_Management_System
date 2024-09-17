@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Contacts_manage
-from .forms import ContactForm
+from .forms import ContactForm, SearchForm
 
 # Create your views here.
 
@@ -40,8 +40,21 @@ def create_contact(request):
 def get_all_contacts(request):
     contacts = Contacts_manage.objects.all()
     # search for contacts by name or email
+    search_form = SearchForm(request.GET)
+    search_query = ""
+    if search_form.is_valid():
+        search_query = search_form.cleaned_data["first_name"]
+
+
+    contacts_arr = []
+
+    for contact in contacts:
+        if search_query and search_query.lower() in contact.first_name.lower():
+            contacts_arr.append(contact)
+            contacts = contacts_arr
     context = {
         "contacts": contacts,
+        "search_form": search_form,
     }
     return render(request, "contactsmanage/get_all_contacts.html", context=context)
 

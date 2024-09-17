@@ -2,7 +2,24 @@
 
 <div class="relative container mx-auto overflow-x-auto shadow-md sm:rounded-lg">
   <h1>Contacts</h1>
+
+
+
   <!-- Search Form -->
+  <form action="">
+    <!-- <input type="text" name="q" placeholder="Search task..." />
+    <input type="submit" value="Search" /> -->
+    {{search_form}}
+    <input type="submit" value="Search" />
+    <!-- reset link -->
+      <a
+        href="{% url 'get_all_contacts' %}"
+        class="text-sm text-gray-400 hover:text-gray-600 focus:outline-none dark:text-gray-500 dark:hover:text-gray-700"
+      >
+        Reset</a
+      >
+  </form>
+
 
   
   <div class="text-right">
