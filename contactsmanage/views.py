@@ -6,10 +6,7 @@ from .forms import ContactForm, SearchForm
 # Create your views here.
 
 
-def home(request):
-    return HttpResponse(
-        "Hello, This is the home page of the Contact Management System."
-    )
+
 
 
 # create contact
