@@ -42,14 +42,16 @@ def get_all_contacts(request):
     # search for contacts by name or email
     search_form = SearchForm(request.GET)
     search_query = ""
+    email_query = ""
+
     if search_form.is_valid():
         search_query = search_form.cleaned_data["first_name"]
-
+        email_query = search_form.cleaned_data.get("email", "")
 
     contacts_arr = []
 
     for contact in contacts:
-        if search_query and search_query.lower() in contact.first_name.lower():
+        if (search_query and search_query.lower() in contact.first_name.lower()) or (email_query and email_query.lower() in contact.email.lower()):
             contacts_arr.append(contact)
             contacts = contacts_arr
     context = {
